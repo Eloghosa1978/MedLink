@@ -6,23 +6,39 @@ import type { ServiceAccount } from "firebase-admin";
 
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
-const serviceAccount:ServiceAccount = {
-  project_id: process.env.FIREBASE_PROJECT_ID!,
-  client_email: process.env.FIREBASE_CLIENT_EMAIL,
-  private_key: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+const serviceAccount: ServiceAccount = {
+  projectId: process.env.FIREBASE_PROJECT_ID!,
+  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n")?.replace(
+    / /g,
+    "\n",
+  ),
 };
+
+if (
+  !process.env.FIREBASE_PROJECT_ID ||
+  !process.env.FIREBASE_CLIENT_EMAIL ||
+  !process.env.FIREBASE_PRIVATE_KEY
+) {
+  throw new Error("Missing Firebase Admin environment variables");
+}
 
 console.log({
   projectId: !!process.env.FIREBASE_PROJECT_ID,
   clientEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
   privateKeyExists: !!process.env.FIREBASE_PRIVATE_KEY,
-  privateKeyStartsWith: process.env.FIREBASE_PRIVATE_KEY?.slice(0, 30),
+  privateKeyStartsWith: process.env.FIREBASE_PRIVATE_KEY?.replace(
+    /\\n/g,
+    "\n",
+  )?.slice(0, 30),
 });
 
-if (!getApps().length) {
-  initializeApp({
-    credential: cert(serviceAccount),
-  });
-}
+export const getAdminAuth = () => {
+  if (!getApps().length) {
+    initializeApp({
+      credential: cert(serviceAccount),
+    });
+  }
 
-export const adminAuth = getAuth();
+  return getAuth();
+};

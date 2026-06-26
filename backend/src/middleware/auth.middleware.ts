@@ -1,5 +1,7 @@
-import { adminAuth } from "../config/firebase-admin";
+import { getAdminAuth } from "../config/firebase-admin";
 import { Request, Response, NextFunction } from "express";
+
+const adminAuth = getAdminAuth();
 
 declare global {
   namespace Express {

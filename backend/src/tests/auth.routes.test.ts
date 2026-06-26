@@ -2,7 +2,6 @@ import request from "supertest";
 import { describe, it, expect } from "vitest";
 import app from "../app";
 
-
 describe("MedLink API", () => {
   it("Returns a health response from the root endpoint", async () => {
     const response = await request(app).get("/");
@@ -24,7 +23,7 @@ describe("Auth Routes", () => {
     expect(response.body.success).toBe(false);
     expect(response.body.message).toContain("Missing auth token");
   });
-  it("should reject unauthenticated requests", async () => {
+  it("Disallows un-authenticated access", async () => {
     const response = await request(app).get("/api/auth/me");
     expect(response.status).toBe(401);
     expect(response.body.success).toBe(false);
@@ -34,14 +33,11 @@ describe("Auth Routes", () => {
 
 describe("Security Test", () => {
   it("Returns 429 after too many requests", async () => {
-    for (let i = 0; i < 20; i++){
-      await request(app).post("/api/auth/sync-user")
+    for (let i = 0; i < 20; i++) {
+      await request(app).post("/api/auth/sync-user");
     }
-    const response = await request(app).post('/api/auth/sync-user')
+    const response = await request(app).post("/api/auth/sync-user");
 
-    expect(response.status).toBe(429)
-  })
-})
-
-
-
+    expect(response.status).toBe(429);
+  });
+});
