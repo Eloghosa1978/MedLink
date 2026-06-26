@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { UserModel } from "../models/authModel";
+import { findUserById, createUser } from "../services/auth.service";
 
 const getCurrentUser = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -9,12 +10,12 @@ const getCurrentUser = async (req: Request, res: Response): Promise<void> => {
     if (!uId) {
       res.status(401).json({
         success: false,
-        message: "Unauthorized",
+        message: "No user id found",
       });
       return;
     }
 
-    const user = await UserModel.findOne({ uId });
+    const user = await findUserById(uId)
 
     if (!user) {
       res.status(404).json({ success: false, message: "User not found" });
@@ -38,14 +39,12 @@ const syncUser = async (req: Request, res: Response): Promise<void> => {
     if (!uId || !email) {
       res.status(401).json({
         success: false,
-        message: "Unauthorized",
+        message: "No user id found",
       });
       return;
     }
 
-    const existingUser = await UserModel.findOne({
-      uId,
-    });
+    const existingUser = await findUserById(uId)
 
     if (existingUser) {
       res.status(200).json({
@@ -58,7 +57,7 @@ const syncUser = async (req: Request, res: Response): Promise<void> => {
 
     const { firstName, lastName, role } = req.body;
 
-    const user = await UserModel.create({
+    const user = await createUser({
       uId,
       email,
       firstName,
