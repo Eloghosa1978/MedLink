@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 import { authMiddleware } from "../middleware/auth.middleware";
-import { syncUser, getCurrentUser } from "../controllers/authController";
+import { handleUser } from "../controllers/authController";
 
 const router = Router();
 
@@ -16,18 +16,18 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-router.post(
-  "/sync-user",
-  authMiddleware,
-  [
-    body("firstName").optional().trim().escape(),
-    body("lastName").optional().trim().escape(),
-    body("role").optional().trim().escape(),
-  ],
-  validate,
-  syncUser,
-);
-
-router.get("/me", authMiddleware, getCurrentUser);
+router
+  .route("/user")
+  .get(authMiddleware, handleUser)
+  .post(
+    authMiddleware,
+    [
+      body("firstName").optional().trim().escape(),
+      body("lastName").optional().trim().escape(),
+      body("role").optional().trim().escape(),
+    ],
+    validate,
+    handleUser,
+  );
 
 export default router;
