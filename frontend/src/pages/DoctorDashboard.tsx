@@ -1,242 +1,493 @@
-import React from 'react';
-
-interface Appointment {
-  id: string;
-  time: string;
-  period: 'AM' | 'PM';
-  patientName: string;
-  reason: string;
-  isNext?: boolean;
-  borderClass: string;
-}
-
-const DoctorDashboard: React.FC = () => {
-  const appointments: Appointment[] = [
-    {
-      id: 'apt-1',
-      time: '09:00',
-      period: 'AM',
-      patientName: 'Michael Chen',
-      reason: 'Follow-up: Hypertension',
-      isNext: true,
-      borderClass: 'border-l-[#003d9b]',
-    },
-    {
-      id: 'apt-2',
-      time: '10:15',
-      period: 'AM',
-      patientName: 'Eleanor Vance',
-      reason: 'Annual Physical',
-      borderClass: 'border-l-[#00687a]',
-    },
-    {
-      id: 'apt-3',
-      time: '11:00',
-      period: 'AM',
-      patientName: 'James Wilson',
-      reason: 'Consultation: Orthopedics',
-      borderClass: 'border-l-[#c3c3d6]',
-    },
-    {
-      id: 'apt-4',
-      time: '01:30',
-      period: 'PM',
-      patientName: 'Sarah Connor',
-      reason: 'Review Lab Results',
-      borderClass: 'border-l-[#c3c3d6]',
-    },
-  ];
-
+const DoctorDashboard = () => {
   return (
-    <div className="bg-[#faf9ff] text-[#051a3e] min-h-screen pb-32 w-full flex flex-col font-sans selection:bg-[#dae2ff] selection:text-[#001848]">
-      {/* Material Symbols Outlined Icons Link Hook */}
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-      />
-
-      {/* ==================== TOP APP BAR ==================== */}
-      <header className="sticky top-0 z-50 bg-white border-b border-[#c3c3d6] flex justify-between items-center w-full px-4 md:px-16 py-3 box-border transition-colors">
-        <div className="flex items-center gap-3">
-          <span className="material-symbols-outlined text-[#003d9b] text-2xl font-variation-settings-fill">
+    <div className="bg-background text-on-background min-h-screen flex">
+      <aside className="bg-black w-64 bg-clinical-navy text-white flex flex-col hidden lg:flex shrink-0">
+        <div className="p-6 flex items-center gap-3">
+          <span className="material-symbols-outlined text-secondary-container text-3xl">
             medical_services
           </span>
-          <h1 className="text-xl font-bold text-[#003d9b]">MedLink</h1>
+          <span className="text-xl font-bold tracking-tight">MedLink</span>
         </div>
-        <div className="relative">
-          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#0052cc]">
-            <img
-              className="w-full h-full object-cover"
-              alt="Dr. Sarah Smith professional portrait reference"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJE6Mnn_MVdSMRoX2RxzJU4HNxn2Q8yya1F838D_ytYgm9Z3bsa1V7_fr7yXeEk8PyGh20WVkaUOLWk-26r6vwQ9OpMNBWGoiBy5s9yhr_9kV0xWJd8WrQitpBejVSgscDsGR-r73erhcQs42blg9cAgrBSOSABGtbwoIgP3FCuG1fZYLbGOTtMs6d3f0UYb-dgnj4sWaxJU9chbjsTTSvvoK4vWaLiD9IeD6GBz_i5Z83pq_rNDYViC2Vb_0miAhVGIBySpo-3row"
-            />
-          </div>
-          <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
-        </div>
-      </header>
-
-      {/* ==================== MAIN CONTENT CANVAS ==================== */}
-      <main className="max-w-xl w-full mx-auto px-4 pt-6 box-border flex-grow">
-        
-        {/* Greeting Banner Segment */}
-        <section className="mb-6 mt-1">
-          <h2 className="text-2xl font-bold text-[#051a3e] tracking-tight mb-0.5">
-            Welcome, Dr. Sarah Smith.
-          </h2>
-          <p className="text-xs text-[#434654]">You have a busy morning ahead.</p>
-        </section>
-
-        {/* Telehealth Telemedicine Instant Quick Room Launcher */}
-        <section className="mb-6">
-          <button
-            type="button"
-            className="w-full relative overflow-hidden bg-[#0052cc] text-white rounded-xl p-5 flex items-center justify-between border-none text-left cursor-pointer shadow-sm active:scale-[0.99] transition-transform"
-          >
-            <div className="relative z-10 flex flex-col items-start">
-              <span className="text-base font-bold flex items-center gap-1.5">
-                <span className="material-symbols-outlined font-variation-settings-fill">video_chat</span>
-                Open Virtual Room
-              </span>
-              <span className="text-[11px] opacity-90 mt-1">Start your next session instantly</span>
+        <nav className="flex-1 mt-4">
+          <ul className="space-y-1">
+            <li>
+              <a
+                className="flex items-center gap-3 px-6 py-3 sidebar-active text-white"
+                href="#"
+              >
+                <span className="material-symbols-outlined">dashboard</span>
+                <span className="font-medium">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-colors text-slate-300"
+                href="#"
+              >
+                <span className="material-symbols-outlined">
+                  calendar_month
+                </span>
+                <span className="font-medium">Appointments</span>
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-colors text-slate-300"
+                href="#"
+              >
+                <span className="material-symbols-outlined">groups</span>
+                <span className="font-medium">Patients</span>
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-colors text-slate-300"
+                href="#"
+              >
+                <span className="material-symbols-outlined">
+                  clinical_notes
+                </span>
+                <span className="font-medium">Medical Records</span>
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-colors text-slate-300"
+                href="#"
+              >
+                <span className="material-symbols-outlined">mail</span>
+                <span className="font-medium">Messaging</span>
+                <span className="ml-auto bg-error text-[10px] px-1.5 py-0.5 rounded-full">
+                  4
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center gap-3 px-6 py-3 hover:bg-white/5 transition-colors text-slate-300"
+                href="#"
+              >
+                <span className="material-symbols-outlined">settings</span>
+                <span className="font-medium">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div className="p-6 border-t border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center">
+              <span className="material-symbols-outlined">account_circle</span>
             </div>
-            <div className="relative z-10 bg-white/20 p-2 rounded-full flex items-center justify-center">
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
+            <div className="overflow-hidden">
+              <p className="text-sm font-semibold truncate">
+                Dr. Julianne Moore
+              </p>
+              <p className="text-xs text-slate-400 truncate">Cardiologist</p>
             </div>
-            {/* Subtle decorative internal background element */}
-            <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
-          </button>
-        </section>
-
-        {/* Operational Statistics Bento Summary Analytics Row Grid */}
-        <section className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-[#f1f3ff] rounded-xl p-4 border border-[#c3c3d6]/50">
-            <div className="flex items-center gap-2 mb-1 text-[#003d9b]">
-              <span className="material-symbols-outlined text-lg">calendar_month</span>
-              <span className="text-[10px] font-bold tracking-wider uppercase">Today</span>
-            </div>
-            <p className="text-3xl font-bold text-[#051a3e] m-0 leading-tight">8</p>
-            <p className="text-[11px] text-[#434654] m-0 mt-0.5 font-medium">Today's Appointments</p>
-          </div>
-
-          <div className="bg-[#f1f3ff] rounded-xl p-4 border border-[#c3c3d6]/50">
-            <div className="flex items-center gap-2 mb-1 text-[#00687a]">
-              <span className="material-symbols-outlined text-lg">person_search</span>
-              <span className="text-[10px] font-bold tracking-wider uppercase">Network</span>
-            </div>
-            <p className="text-3xl font-bold text-[#051a3e] m-0 leading-tight">154</p>
-            <p className="text-[11px] text-[#434654] m-0 mt-0.5 font-medium">Total Patients</p>
-          </div>
-        </section>
-
-        {/* Daily Patient Consultation Workflow Tracker Section */}
-        <section className="mb-12">
-          <div className="flex items-center justify-between mb-3.5">
-            <h3 className="text-base font-bold text-[#051a3e] m-0">Today's Schedule</h3>
-            <button type="button" className="text-[#003d9b] bg-transparent border-none text-xs font-bold hover:underline cursor-pointer">
-              View All
+            <button className="ml-auto text-slate-400 hover:text-white">
+              <span className="material-symbols-outlined">logout</span>
             </button>
           </div>
+        </div>
+      </aside>
 
-          {/* Chronological Vertical List Array mapping */}
-          <div className="space-y-3">
-            {appointments.map((apt) => (
-              <div
-                key={apt.id}
-                className={`bg-white rounded-xl border-l-4 ${apt.borderClass} shadow-sm p-4 flex items-center justify-between`}
-              >
-                <div className="flex gap-4 items-center min-w-0 flex-1">
-                  <div className={`flex flex-col items-center justify-center min-w-[54px] ${apt.isNext ? 'text-[#003d9b]' : 'text-[#434654]'}`}>
-                    <span className="text-base font-bold leading-none">{apt.time}</span>
-                    <span className="text-[10px] font-bold mt-0.5 tracking-wider">{apt.period}</span>
-                  </div>
-                  <div className="h-8 w-px bg-[#c3c3d6]/40 shrink-0"></div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-bold text-[#051a3e] m-0 truncate">{apt.patientName}</p>
-                    <p className="text-xs text-[#434654] m-0 mt-0.5 truncate">{apt.reason}</p>
-                  </div>
+      <div className="flex-1 flex flex-col min-w-0">
+        <header className="h-16 bg-white border-b border-outline-variant flex items-center justify-between px-6 sticky top-0 z-10">
+          <div className="flex items-center gap-4 flex-1">
+            <button className="lg:hidden text-on-surface">
+              <span className="material-symbols-outlined">menu</span>
+            </button>
+            <div className="relative w-full max-w-md">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">
+                search
+              </span>
+              <input
+                className="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-secondary/20 transition-all"
+                placeholder="Search patient records, reports..."
+                type="text"
+              />
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <button className="w-10 h-10 flex items-center justify-center text-outline hover:bg-surface-container rounded-full relative">
+              <span className="material-symbols-outlined">notifications</span>
+              <span className="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-white"></span>
+            </button>
+            <div className="h-8 w-[1px] bg-outline-variant"></div>
+            <div className="flex items-center gap-2 cursor-pointer hover:bg-surface-container p-1 rounded-lg">
+              <div className="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-xs">
+                JM
+              </div>
+              <span className="text-sm font-medium hidden sm:inline">
+                Dr. Moore
+              </span>
+              <span className="material-symbols-outlined text-outline">
+                expand_more
+              </span>
+            </div>
+          </div>
+        </header>
+
+        <main className="flex-1 p-6 space-y-6 overflow-y-auto custom-scrollbar">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-clinical-navy">
+                Good morning, Dr. Moore
+              </h1>
+              <p className="text-on-surface-variant">
+                Here's what's happening with your practice today.
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <button className="px-4 py-2 bg-white border border-outline-variant rounded-lg text-sm font-medium hover:bg-surface-container-low transition-colors flex items-center gap-2">
+                <span className="material-symbols-outlined text-sm">
+                  download
+                </span>{" "}
+                Export Data
+              </button>
+              <button className="px-4 py-2 bg-secondary text-white rounded-lg text-sm font-medium hover:bg-secondary/90 transition-colors flex items-center gap-2">
+                <span className="material-symbols-outlined text-sm">add</span>{" "}
+                New Appointment
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white p-5 rounded-xl border border-outline-variant shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-secondary">
+                  <span className="material-symbols-outlined">groups</span>
                 </div>
-
-                <div className="flex items-center gap-2 shrink-0 ml-2">
-                  {apt.isNext && (
-                    <span className="bg-[#ffdad6] text-[#410002] px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wider">
-                      NEXT
-                    </span>
-                  )}
-                  <span className="material-symbols-outlined text-[#737685] cursor-pointer hover:text-[#051a3e]">
-                    more_vert
+                <span className="text-xs font-medium text-on-tertiary-container bg-tertiary-fixed px-2 py-1 rounded">
+                  +12%
+                </span>
+              </div>
+              <p className="text-sm text-on-surface-variant">Total Patients</p>
+              <h3 className="text-2xl font-bold text-clinical-navy">1,284</h3>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-outline-variant shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary">
+                  <span className="material-symbols-outlined">
+                    calendar_today
                   </span>
                 </div>
+                <span className="text-xs font-medium text-on-surface-variant bg-surface-container px-2 py-1 rounded">
+                  Today
+                </span>
               </div>
-            ))}
+              <p className="text-sm text-on-surface-variant">
+                Today's Appointments
+              </p>
+              <h3 className="text-2xl font-bold text-clinical-navy">14</h3>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-outline-variant shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
+                  <span className="material-symbols-outlined">
+                    pending_actions
+                  </span>
+                </div>
+                <span className="text-xs font-medium text-orange-700 bg-orange-50 px-2 py-1 rounded">
+                  High
+                </span>
+              </div>
+              <p className="text-sm text-on-surface-variant">Pending Reports</p>
+              <h3 className="text-2xl font-bold text-clinical-navy">08</h3>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-outline-variant shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-600">
+                  <span className="material-symbols-outlined">
+                    chat_bubble_outline
+                  </span>
+                </div>
+                <span className="text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded">
+                  New
+                </span>
+              </div>
+              <p className="text-sm text-on-surface-variant">New Messages</p>
+              <h3 className="text-2xl font-bold text-clinical-navy">04</h3>
+            </div>
           </div>
-        </section>
 
-        {/* Micro-Contextual Vibe / Weather Operating Load Monitor Status Indicator */}
-        <section className="mb-6">
-          <div className="bg-white border border-[#c3c3d6] rounded-2xl p-4 overflow-hidden relative shadow-sm">
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="bg-[#adecff] text-[#001f26] p-2 rounded-full flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined font-variation-settings-fill text-xl">wb_sunny</span>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 bg-white rounded-xl border border-outline-variant shadow-sm flex flex-col">
+              <div className="p-6 border-b border-outline-variant flex items-center justify-between">
+                <h2 className="text-lg font-bold text-clinical-navy">
+                  Upcoming Appointments
+                </h2>
+                <a
+                  className="text-secondary text-sm font-medium hover:underline"
+                  href="#"
+                >
+                  View All
+                </a>
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-bold text-[#051a3e] m-0">A Clear Day for Care</p>
-                <p className="text-xs text-[#434654] m-0 mt-0.5">The clinic is operating at normal capacity.</p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="bg-surface-container-low text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
+                      <th className="px-6 py-3">Patient</th>
+                      <th className="px-6 py-3">Time</th>
+                      <th className="px-6 py-3">Type</th>
+                      <th className="px-6 py-3 text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-outline-variant">
+                    <tr>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-xs text-clinical-navy">
+                            AS
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold">
+                              Adrian Smith
+                            </p>
+                            <p className="text-xs text-on-surface-variant">
+                              Routine Checkup
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm">09:30 AM</td>
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
+                          <span className="material-symbols-outlined text-[14px]">
+                            videocam
+                          </span>{" "}
+                          Video
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <button className="bg-secondary text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-secondary/90">
+                          Join
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-xs text-clinical-navy">
+                            EB
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold">
+                              Elena Belova
+                            </p>
+                            <p className="text-xs text-on-surface-variant">
+                              Post-Surgery Follow-up
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm">11:00 AM</td>
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-purple-50 text-purple-700 text-xs font-medium rounded-full">
+                          <span className="material-symbols-outlined text-[14px]">
+                            person
+                          </span>{" "}
+                          In-person
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <button className="border border-outline-variant text-clinical-navy text-xs font-bold px-3 py-1.5 rounded hover:bg-surface-container-low">
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-xs text-clinical-navy">
+                            MC
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold">Mark Chen</p>
+                            <p className="text-xs text-on-surface-variant">
+                              Consultation
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm">01:45 PM</td>
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">
+                          <span className="material-symbols-outlined text-[14px]">
+                            videocam
+                          </span>{" "}
+                          Video
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <button className="border border-outline-variant text-clinical-navy text-xs font-bold px-3 py-1.5 rounded hover:bg-surface-container-low">
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-xs text-clinical-navy">
+                            DR
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold">David Ross</p>
+                            <p className="text-xs text-on-surface-variant">
+                              Lab Results Review
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm">03:30 PM</td>
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-purple-50 text-purple-700 text-xs font-medium rounded-full">
+                          <span className="material-symbols-outlined text-[14px]">
+                            person
+                          </span>{" "}
+                          In-person
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <button className="border border-outline-variant text-clinical-navy text-xs font-bold px-3 py-1.5 rounded hover:bg-surface-container-low">
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            {/* Abstract fluid vector path decoration element */}
-            <div className="absolute right-0 top-0 h-full w-1/3 opacity-10 pointer-events-none flex items-center justify-end">
-              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full object-cover">
-                <path
-                  d="M47.7,-64.1C60.4,-57.1,68.4,-41.2,74.7,-24.5C80.9,-7.7,85.5,10,80.7,25.8C75.8,41.6,61.6,55.5,45.8,64.2C30.1,72.9,12.8,76.4,-3.2,80.8C-19.3,85.2,-34.1,90.4,-48.3,85.6C-62.5,80.8,-76.1,65.9,-82.2,49C-88.3,32.1,-87,13.2,-81.4,-3.2C-75.8,-19.7,-65.9,-33.6,-54,-41.8C-42,-50,-28.1,-52.4,-14.2,-60C-0.3,-67.6,13.6,-80.4,30.3,-78.9C47,-77.4,66.4,-61.5,47.7,-64.1Z"
-                  fill="#00687a"
-                  transform="translate(130 100)"
-                ></path>
-              </svg>
+
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl border border-outline-variant shadow-sm p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-sm font-bold text-clinical-navy">
+                    Daily Schedule
+                  </h2>
+                  <span className="text-xs text-on-surface-variant font-medium">
+                    May 24, 2024
+                  </span>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex gap-4">
+                    <div className="text-xs font-bold text-on-surface-variant w-12 pt-1">
+                      08:00
+                    </div>
+                    <div className="flex-1 p-2 bg-surface-container-low rounded border-l-4 border-secondary">
+                      <p className="text-xs font-semibold">Staff Meeting</p>
+                      <p className="text-[10px] text-on-surface-variant">
+                        Conference Room B
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="text-xs font-bold text-on-surface-variant w-12 pt-1">
+                      09:30
+                    </div>
+                    <div className="flex-1 p-2 bg-blue-50 rounded border-l-4 border-blue-400">
+                      <p className="text-xs font-semibold">
+                        Patient: Adrian Smith
+                      </p>
+                      <p className="text-[10px] text-blue-700">Video Call</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="text-xs font-bold text-on-surface-variant w-12 pt-1">
+                      12:30
+                    </div>
+                    <div className="flex-1 p-2 bg-surface-container-low rounded border-l-4 border-slate-300">
+                      <p className="text-xs font-semibold">Lunch Break</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="text-xs font-bold text-on-surface-variant w-12 pt-1">
+                      14:00
+                    </div>
+                    <div className="flex-1 p-2 bg-surface-container-low rounded border-l-4 border-clinical-navy">
+                      <p className="text-xs font-semibold">Dept. Review</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl border border-outline-variant shadow-sm">
+                <div className="p-4 border-b border-outline-variant">
+                  <h2 className="text-sm font-bold text-clinical-navy">
+                    Patient Requests
+                  </h2>
+                </div>
+                <div className="divide-y divide-outline-variant">
+                  <div className="p-4 hover:bg-surface-container-low transition-colors">
+                    <div className="flex gap-3">
+                      <span className="material-symbols-outlined text-secondary">
+                        prescriptions
+                      </span>
+                      <div className="flex-1">
+                        <p className="text-xs font-semibold">
+                          Prescription Renewal
+                        </p>
+                        <p className="text-[11px] text-on-surface-variant mb-2">
+                          Sarah Jenkins - Lisinopril 20mg
+                        </p>
+                        <div className="flex gap-2">
+                          <button className="px-2 py-1 bg-secondary text-white text-[10px] font-bold rounded">
+                            Approve
+                          </button>
+                          <button className="px-2 py-1 border border-outline-variant text-[10px] font-bold rounded">
+                            Review
+                          </button>
+                        </div>
+                      </div>
+                      <span className="text-[10px] text-on-surface-variant">
+                        2h ago
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-4 hover:bg-surface-container-low transition-colors">
+                    <div className="flex gap-3">
+                      <span className="material-symbols-outlined text-orange-500">
+                        lab_research
+                      </span>
+                      <div className="flex-1">
+                        <p className="text-xs font-semibold">New Lab Results</p>
+                        <p className="text-[11px] text-on-surface-variant">
+                          Mark Chen - Blood Panel
+                        </p>
+                      </div>
+                      <span className="text-[10px] text-on-surface-variant">
+                        4h ago
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-4 hover:bg-surface-container-low transition-colors">
+                    <div className="flex gap-3">
+                      <span className="material-symbols-outlined text-blue-500">
+                        contact_support
+                      </span>
+                      <div className="flex-1">
+                        <p className="text-xs font-semibold">General Inquiry</p>
+                        <p className="text-[11px] text-on-surface-variant">
+                          James Wilson - "Regarding post-op pain"
+                        </p>
+                      </div>
+                      <span className="text-[10px] text-on-surface-variant">
+                        Yesterday
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-3 text-center border-t border-outline-variant">
+                  <button className="text-xs font-bold text-secondary hover:underline">
+                    View All Requests
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-      </main>
-
-      {/* Global Quick Capture System Action FAB Core */}
-      <button
-        type="button"
-        className="fixed right-4 bottom-24 bg-[#003d9b] text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg active:scale-95 transition-transform border-none cursor-pointer z-40"
-      >
-        <span className="material-symbols-outlined text-2xl">add</span>
-      </button>
-
-      {/* ==================== BOTTOM TAB APPARATUS HUB NAV BAR ==================== */}
-      <nav className="bg-white border-t border-[#c3c3d6] shadow-[0px_-4px_12px_rgba(9,30,66,0.08)] fixed bottom-0 left-0 w-full h-[72px] flex justify-around items-center px-2 pb-5 z-50 rounded-t-xl box-border transition-all">
-        <a
-          className="flex flex-col items-center justify-center bg-[#dae2ff] text-[#001848] rounded-full px-4 py-1 scale-95 no-underline"
-          href="#home"
-        >
-          <span className="material-symbols-outlined font-variation-settings-fill">dashboard</span>
-          <span className="text-[10px] font-bold mt-0.5">Home</span>
-        </a>
-        <a className="flex flex-col items-center justify-center text-[#434654] no-underline w-16" href="#schedule">
-          <span className="material-symbols-outlined">calendar_today</span>
-          <span className="text-[10px] font-medium mt-0.5">Schedule</span>
-        </a>
-        <a className="flex flex-col items-center justify-center text-[#434654] no-underline w-16" href="#patients">
-          <span className="material-symbols-outlined">groups</span>
-          <span className="text-[10px] font-medium mt-0.5">Patients</span>
-        </a>
-        <a className="flex flex-col items-center justify-center text-[#434654] no-underline w-16" href="#alerts">
-          <div className="relative flex items-center justify-center">
-            <span className="material-symbols-outlined">notifications</span>
-            <span className="absolute top-0 right-0 w-1.5 h-1.5 bg-[#ba1a1a] rounded-full border border-white"></span>
-          </div>
-          <span className="text-[10px] font-medium mt-0.5">Alerts</span>
-        </a>
-      </nav>
-
-      {/* Font fill variables block adjustments */}
-      <style>{`
-        .font-variation-settings-fill {
-          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-      `}</style>
+        </main>
+      </div>
     </div>
   );
 };
