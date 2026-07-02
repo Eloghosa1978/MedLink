@@ -1,5 +1,6 @@
 import { getAdminAuth } from "../config/firebase-admin";
 import { Request, Response, NextFunction } from "express";
+import { findUserById } from "../services/auth.service";
 
 const adminAuth = getAdminAuth();
 
@@ -26,8 +27,20 @@ export const authMiddleware = async (
   const idToken = authHeader.split(" ")[1];
 
   try {
-    const decodeToken = await adminAuth.verifyIdToken(idToken);
-    req.user = decodeToken;
+    const decodedToken = await adminAuth.verifyIdToken(idToken);
+
+    const dbUser = await findUserById(decodedToken.uid);
+
+    if (!dbUser) {
+      return res.status(401).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    req.user = decodedToken;
+    req.dbUser = dbUser;
+
     next();
   } catch (error) {
     return res
