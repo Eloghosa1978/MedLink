@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "MedLink",
+        "supportEmail": "eloghosa.nosakhare@techskool.org"
+      }
+    }
+  }
+}
