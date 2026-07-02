@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import rateLimit from "express-rate-limit";
+import profileRoutes from "./routes/profile.routes";
 
 // defining routes
 import authRoutes from "./routes/auth.routes";
@@ -45,7 +46,9 @@ const authLimiter = rateLimit({
 app.use("/api", globalLimiter);
 
 // use limits to specific auth routes
-app.use("/api/auth",  authLimiter, authRoutes);
+app.use("/api/auth", authLimiter, authRoutes);
+// use limits to specific profile routes
+app.use("/api/profile", profileRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({

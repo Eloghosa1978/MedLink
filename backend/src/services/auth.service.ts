@@ -1,24 +1,25 @@
 import { UserModel } from "../models/authModel";
+import { Types } from "mongoose";
 
-export const findUserById = async (uId: string) => {
-  return UserModel.findOne({ uId });
+export const findUserById = async (uid: string) => {
+  return await UserModel.findOne({ uid });
 };
 
 export const createUser = async ({
-  uId,
+  uid,
   email,
   firstName,
   lastName,
   role,
 }: {
-  uId: string;
+  uid: string;
   email: string;
   firstName: string;
   lastName: string;
   role: "patient" | "doctor" | undefined;
 }) => {
   return UserModel.create({
-    uId,
+    uid,
     email,
     firstName,
     lastName,

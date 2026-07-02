@@ -4,10 +4,10 @@ import { findUserById, createUser } from "../services/auth.service";
 const handleUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const isGetRequest = req.method === "GET";
-    const uId = req.user?.uid;
+    const uid = req.user?.uid;
     const email = req.user?.email;
 
-    if (!uId || email) {
+    if (!uid || email) {
       res.status(401).json({
         success: false,
         message: "No user credentials",
@@ -15,7 +15,7 @@ const handleUser = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const user = await findUserById(uId);
+    const user = await findUserById(uid);
 
     // Get Request /auth/user
     if (isGetRequest) {
@@ -38,7 +38,7 @@ const handleUser = async (req: Request, res: Response): Promise<void> => {
       const { firstName, lastName, role } = req.body;
 
       const user = await createUser({
-        uId,
+        uid,
         email,
         firstName,
         lastName,
