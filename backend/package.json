@@ -9,7 +9,7 @@
     "test:coverage": "vitest run --coverage",
     "build": "tsc",
     "dev": "nodemon src/server.ts",
-    "start": "tsx server.ts"
+    "start": "tsx src/server.ts"
   },
   "keywords": [],
   "author": "",
