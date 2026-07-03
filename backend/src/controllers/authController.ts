@@ -7,7 +7,7 @@ const handleUser = async (req: Request, res: Response): Promise<void> => {
     const uid = req.user?.uid;
     const email = req.user?.email;
 
-    if (!uid || email) {
+    if (!uid || !email) {
       res.status(401).json({
         success: false,
         message: "No user credentials",
