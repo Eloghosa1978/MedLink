@@ -17,6 +17,8 @@ import Billing from './pages/Billing';
 import NotificationsCenter from './pages/NotificationsCenter';
 import LabServices from './pages/LabServices';
 import DoctorDashboard from './pages/DoctorDashboard';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
       <Route path='/notifications' element={<NotificationsCenter/>}/>
       <Route path='/labservices' element={<LabServices/>}/>
       <Route path='/doctordashboard' element={<DoctorDashboard/>}/>
+      <Route path='/aboutpage' element={<AboutPage/>}/>
+      <Route path='/servicespage' element={<ServicesPage/>}/>
     </Routes>
     </>
   )
