@@ -353,3 +353,379 @@ Doctor
 
 * Appointment management
 * Accept/Reject
+* Accept/Reject appointments
+
+---
+
+## Tools
+
+Backend
+
+* MongoDB Transactions (optional)
+
+Frontend
+
+* React Query
+
+---
+
+## Logic
+
+```text
+Patient
+      ↓
+Select Doctor
+      ↓
+Select Time Slot
+      ↓
+Book Appointment
+      ↓
+Doctor Confirms
+```
+
+---
+
+# Phase 6 — Notifications
+
+## Goal
+
+Keep users informed.
+
+---
+
+## Backend Features
+
+Notification Model
+
+Types
+
+* Appointment booked
+* Appointment cancelled
+* Appointment reminder
+* System notification
+
+---
+
+## Frontend Features
+
+* Notification Center
+* Notification badge
+* Read/unread state
+
+---
+
+## Tools
+
+Backend
+
+* Firebase Cloud Messaging (future)
+
+Frontend
+
+* React Query
+
+---
+
+## Logic
+
+```text
+Appointment Updated
+       ↓
+Notification Created
+       ↓
+Displayed to User
+```
+
+---
+
+# Phase 7 — Medical Records
+
+## Goal
+
+Provide a secure patient medical history.
+
+---
+
+## Backend Features
+
+Medical Record Model
+
+Fields
+
+* Diagnosis
+* Prescription
+* Doctor Notes
+* Attachments
+* Visit Date
+
+Endpoints
+
+* Create record
+* Update record
+* View records
+
+---
+
+## Frontend Features
+
+Doctor
+
+* Create records
+* Edit records
+
+Patient
+
+* View records
+* Download records
+
+---
+
+## Tools
+
+Backend
+
+* MongoDB
+* Cloud Storage
+
+Frontend
+
+* PDF Viewer
+
+---
+
+## Logic
+
+```text
+Doctor Consultation
+       ↓
+Medical Record Created
+       ↓
+Patient Can View
+```
+
+---
+
+# Phase 8 — Telemedicine
+
+## Goal
+
+Allow virtual consultations.
+
+---
+
+## Backend Features
+
+* Meeting scheduling
+* Video session creation
+
+---
+
+## Frontend Features
+
+* Join consultation
+* Video controls
+* Chat
+
+---
+
+## Tools
+
+* WebRTC
+* Daily
+* Agora
+* Jitsi Meet
+
+---
+
+## Logic
+
+```text
+Appointment Confirmed
+       ↓
+Meeting Created
+       ↓
+Patient Joins
+       ↓
+Doctor Joins
+```
+
+---
+
+# Phase 9 — Dashboards & Analytics
+
+## Goal
+
+Provide useful insights.
+
+---
+
+## Doctor Dashboard
+
+* Total Patients
+* Upcoming Appointments
+* Monthly Statistics
+
+---
+
+## Patient Dashboard
+
+* Upcoming Appointments
+* Recent Records
+* Notifications
+
+---
+
+## Tools
+
+Frontend
+
+* Chart.js
+* Recharts
+
+---
+
+# Phase 10 — Smart Features (Competition Differentiators)
+
+## Goal
+
+Deliver features that make MedLink stand out.
+
+---
+
+## AI Symptom Checker
+
+Features
+
+* Enter symptoms
+* Suggested conditions
+* Recommended specialist
+
+Possible Tools
+
+* OpenAI API
+* Gemini API
+
+---
+
+## Medication Reminder
+
+Features
+
+* Reminder schedule
+* Daily notifications
+
+---
+
+## Smart Doctor Recommendation
+
+Recommend doctors based on
+
+* Specialty
+* Availability
+* Ratings
+* Previous consultations
+
+---
+
+## Future Features
+
+* Electronic prescriptions
+* Laboratory integration
+* Pharmacy integration
+* Insurance support
+* Health wallet
+* Family account management
+* Emergency SOS
+* Wearable device integration
+
+---
+
+# Development Workflow
+
+Backend First
+
+1. Design Model
+2. Create Controller
+3. Create Routes
+4. Add Validation
+5. Test Endpoints
+6. Write Tests
+7. Review
+8. Merge
+
+Frontend
+
+1. Build UI
+2. Connect API
+3. Handle Loading
+4. Handle Errors
+5. Test
+6. Review
+7. Merge
+
+---
+
+# Tech Stack
+
+## Backend
+
+* Node.js
+* Express.js
+* TypeScript
+* MongoDB
+* Mongoose
+* Firebase Admin SDK
+* Vitest
+* Supertest
+* GitHub Actions
+
+---
+
+## Frontend
+
+* React
+* Vite
+* TypeScript
+* Firebase Authentication
+* Tailwind CSS
+* React Router
+* TanStack Query
+* React Hook Form
+* Zod
+
+---
+
+# Deployment
+
+Frontend
+
+* Firebase Hosting
+
+Backend
+
+* Vercel
+
+Database
+
+* MongoDB Atlas
+
+CI/CD
+
+* GitHub Actions
+
+---
+
+# Current Progress
+
+| Phase                       | Status     |
+| --------------------------- | ---------- |
+| Foundation & Authentication | ✅ Complete |
+| User Profiles               | ⏳ Next     |
+| Doctor Discovery            | ⏳ Planned  |
+| Availability                | ⏳ Planned  |
+| Appointment Booking         | ⏳ Planned  |
+| Notifications               | ⏳ Planned  |
+| Medical Records             | ⏳ Planned  |
+| Telemedicine                | ⏳ Planned  |
+| Analytics                   | ⏳ Planned  |
+| Smart Features              | ⏳ Planned  |
