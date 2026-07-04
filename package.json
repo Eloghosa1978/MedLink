@@ -16,6 +16,9 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "concurrently": "^10.0.3"
+    "autoprefixer": "^10.5.1",
+    "concurrently": "^10.0.3",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^4.3.1"
   }
 }

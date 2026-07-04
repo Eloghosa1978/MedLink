@@ -352,6 +352,7 @@ Patient
 Doctor
 
 * Appointment management
+* Accept/Reject
 * Accept/Reject appointments
 
 ---
