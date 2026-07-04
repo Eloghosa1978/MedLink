@@ -43,7 +43,7 @@ const userSchema = new Schema(
     onboardingStatus: {
       type: String,
       enum: ["pending", "completed", "skipped"],
-      required: true,
+      default: "pending",
     },
     onboardingStep: {
       type: Number,

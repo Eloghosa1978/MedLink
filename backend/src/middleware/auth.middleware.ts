@@ -28,19 +28,7 @@ export const authMiddleware = async (
 
   try {
     const decodedToken = await adminAuth.verifyIdToken(idToken);
-
-    const dbUser = await findUserById(decodedToken.uid);
-
-    if (!dbUser) {
-      return res.status(401).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
     req.user = decodedToken;
-    req.dbUser = dbUser;
-
     next();
   } catch (error) {
     return res

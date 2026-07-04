@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import { authMiddleware } from "../middleware/auth.middleware";
-import { authorizeRole } from "../middleware/authorize.middleware";
+import { loadUserMiddleware } from "../middleware/loadUser.middleware";
 import { profileController } from "../controllers/profile.controller";
 import {
   patientProfileUpdateValidator,
@@ -50,8 +50,8 @@ const applyProfileUpdateValidator = (
 
 router
   .route("/")
-  .get(authMiddleware, profileController)
-  .post(authMiddleware, validate, profileController)
+  .get(authMiddleware, loadUserMiddleware, profileController)
+  .post(authMiddleware, loadUserMiddleware, validate, profileController)
   .patch(
     authMiddleware,
     applyProfileUpdateValidator,

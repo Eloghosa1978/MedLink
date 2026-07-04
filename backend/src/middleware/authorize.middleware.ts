@@ -2,14 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { findUserById } from "../services/auth.service";
 import { UserDocument } from "../models/authModel";
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: any;
-      dbUser?: UserDocument;
-    }
-  }
-}
 
 export const authorizeRole =
   (requiredRole: "patient" | "doctor" | "admin") =>
