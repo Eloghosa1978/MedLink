@@ -1,3 +1,5 @@
+import "react"
+
 const PatientDashboard = () => {
   return (
     <div>
