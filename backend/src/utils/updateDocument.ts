@@ -1,5 +1,5 @@
 import { Model, Document, UpdateQuery, QueryOptions } from "mongoose";
-import { UserDocument } from "../models/authModel";
+
 
 export const updateDocument = async <T extends object>(
   model: Model<T>,

@@ -4,6 +4,7 @@ type UserOnboardingData = {
   phoneNumber: string;
   dateOfBirth: Date;
   gender: "male" | "female";
+  profileImage: string;
 };
 
 export const completeBasicProfile = async (

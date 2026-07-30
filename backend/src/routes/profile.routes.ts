@@ -7,7 +7,7 @@ import {
   patientProfileUpdateValidator,
   doctorProfileUpdateValidator,
 } from "../validators/profileUpdateValidator";
-
+import {applyOnboardingValidator} from "../validators/onboarding.validator";
 const router = Router();
 
 const validate = (req: Request, res: Response, next: NextFunction) => {
@@ -51,12 +51,19 @@ const applyProfileUpdateValidator = (
 router
   .route("/")
   .get(authMiddleware, loadUserMiddleware, profileController)
-  .post(authMiddleware, loadUserMiddleware, validate, profileController)
   .patch(
     authMiddleware,
+    loadUserMiddleware,
     applyProfileUpdateValidator,
     validate,
     profileController,
   );
-
+router.post(
+  "/onboarding",
+  authMiddleware,
+  loadUserMiddleware,
+  applyOnboardingValidator,
+  validate,
+  profileController,
+);
 export default router;

@@ -27,15 +27,15 @@ if (
   throw new Error("Missing Firebase Admin environment variables");
 }
 
-console.log({
-  projectId: !!process.env.FIREBASE_PROJECT_ID,
-  clientEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
-  privateKeyExists: !!process.env.FIREBASE_PRIVATE_KEY,
-  privateKeyStartsWith: process.env.FIREBASE_PRIVATE_KEY?.replace(
-    /\\n/g,
-    "\n",
-  )?.slice(0, 30),
-});
+// console.log({
+//   projectId: !!process.env.FIREBASE_PROJECT_ID,
+//   clientEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
+//   privateKeyExists: !!process.env.FIREBASE_PRIVATE_KEY,
+//   privateKeyStartsWith: process.env.FIREBASE_PRIVATE_KEY?.replace(
+//     /\\n/g,
+//     "\n",
+//   )?.slice(0, 30),
+// });
 
 export const getAdminAuth = () => {
   if (!getApps().length) {

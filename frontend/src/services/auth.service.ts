@@ -29,7 +29,6 @@ const authErrorMessages: Record<string, string> = {
     "An account already exists with this email using a different sign-in provider.",
   "auth/operation-not-allowed": "This sign-in method is currently disabled.",
 };
-
 const getAuthErrorMessage = (error: unknown): string => {
   if (error instanceof FirebaseError) {
     console.error(

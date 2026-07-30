@@ -23,6 +23,7 @@ const userSchema = new Schema(
     phoneNumber: {
       type: String,
       trim: true,
+      unique: true,
     },
     dateOfBirth: {
       type: Date,
@@ -61,6 +62,7 @@ const userSchema = new Schema(
   },
   {
     timestamps: true,
+    strict: true,
   },
 );
 

@@ -30,14 +30,17 @@ export const updateProfileStep2 = async <T>(
   model: Model<T>,
   data: Object,
 ) => {
-  const profile = await model.findByIdAndUpdate(
+  const profile = await model.findOneAndUpdate(
+    { userId: user._id },
     {
       $set: data,
     },
     {
       new: true,
+      runValidators: true,
+      upsert: true,
     },
   );
-  advanceOnboardingStep(user);
+  await advanceOnboardingStep(user);
   return profile;
 };

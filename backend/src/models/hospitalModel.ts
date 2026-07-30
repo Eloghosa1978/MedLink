@@ -29,6 +29,7 @@ const hospitalSchema = new Schema(
   },
   {
     timestamps: true,
+    strict: true,
   },
 );
 export type Hospital = InferSchemaType<typeof hospitalSchema>;
