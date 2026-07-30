@@ -33,13 +33,21 @@ const getProfile = async (req: Request, res: Response) => {
     return;
   }
 
+  if (!profile) {
+    return res.status(404).json({
+      success: false,
+      code: "PROFILE_NOT_FOUND",
+      message: "Profile not found",
+    });
+  }
+
   return res.status(200).json({
     success: true,
     code: "PROFILE_FETCHED",
     message: "Profile fetched successfully",
     data: {
       user,
-      profile: profile ?? null,
+      profile: profile ?? null
     },
   });
 };
@@ -90,6 +98,7 @@ const onboardingController = async (req: Request, res: Response) => {
       message: "Onboarding step completed successfully",
       data: result,
     });
+
   }
   return res.status(400).json({
     success: false,

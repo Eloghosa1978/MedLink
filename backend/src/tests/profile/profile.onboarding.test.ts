@@ -47,9 +47,8 @@ describe("POST /api/profile/onboarding", () => {
         .post("/api/profile/onboarding")
         .set("Authorization", "Bearer fake-token")
         .send({
-          phoneNumber: "08012345678",
-          dateOfBirth: "2002-05-05",
-          gender: "male",
+          bloodGroup: "O+",
+          genotype: "AA",
         });
       expect(response.status).toBe(200);
 
