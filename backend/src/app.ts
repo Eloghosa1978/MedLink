@@ -13,8 +13,17 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json({ limit: "10kb" }));
-// app.use(mongoSanitize());
 
+const sanitize = (mongoSanitize as any).sanitize;
+
+app.use((req, res, next) => {
+  if (req.body) req.body = sanitize(req.body);
+
+  if (req.params) req.params = sanitize(req.params);
+  if (req.headers) req.headers = sanitize(req.headers);
+
+  next();
+});
 // Api rate limiting configuration
 
 // Global limiter

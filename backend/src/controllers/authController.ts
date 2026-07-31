@@ -4,8 +4,8 @@ import { findUserById, createUser } from "../services/auth.service";
 const handleUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const isGetRequest = req.method === "GET";
-    const uid = req.user?.uid;
-    const email = req.user?.email;
+    const uid =   String(req.user?.uid);
+    const email =   String(req.user?.email);
 
     if (!uid || !email) {
       res.status(401).json({
@@ -64,6 +64,8 @@ const handleUser = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({
       success: false,
       message: "Internal server errror",
+      error: `Error message: ${error}`,
+
     });
   }
 };

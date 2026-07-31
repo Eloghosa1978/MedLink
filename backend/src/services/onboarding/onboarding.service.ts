@@ -26,6 +26,15 @@ const handleOnboardingStep = async (
     });
   }
 
+  const requestedStep = Number(req.body.step ?? user.onboardingStep);
+  if(requestedStep !== user.onboardingStep) {
+    return res.status(400).json({
+      success: false,
+      code: "ONBOARDING_STEP_MISMATCH",
+      message: `Requested step ${requestedStep} does not match user's current onboarding step ${user.onboardingStep}`,
+    });
+  }
+
   if (user.onboardingStep === 0) {
     return completeBasicProfile(user, req.body);
   }

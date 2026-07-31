@@ -1,13 +1,13 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 import { authMiddleware } from "../middleware/auth.middleware";
-import { authorizeRole } from "../middleware/authorize.middleware";
+import { loadUserMiddleware } from "../middleware/loadUser.middleware";
 import { profileController } from "../controllers/profile.controller";
 import {
   patientProfileUpdateValidator,
   doctorProfileUpdateValidator,
 } from "../validators/profileUpdateValidator";
-
+import {applyOnboardingValidator} from "../validators/onboarding.validator";
 const router = Router();
 
 const validate = (req: Request, res: Response, next: NextFunction) => {
@@ -50,13 +50,20 @@ const applyProfileUpdateValidator = (
 
 router
   .route("/")
-  .get(authMiddleware, profileController)
-  .post(authMiddleware, validate, profileController)
+  .get(authMiddleware, loadUserMiddleware, profileController)
   .patch(
     authMiddleware,
+    loadUserMiddleware,
     applyProfileUpdateValidator,
     validate,
     profileController,
   );
-
+router.post(
+  "/onboarding",
+  authMiddleware,
+  loadUserMiddleware,
+  applyOnboardingValidator,
+  validate,
+  profileController,
+);
 export default router;

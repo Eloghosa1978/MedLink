@@ -7,31 +7,26 @@ import {
 
 // Define the data structure for step one of patient onboarding
 type PatientStepOneData = {
-  phoneNumber: string;
-  dateOfBirth: Date;
-  gender: "male" | "female";
-};
-
-type PatientStepTwoData = {
   bloodGroup: "A+" | "A-" | "B+" | "B-" | "AB+" | "AB-" | "O+" | "O-";
   genotype: "AA" | "AS" | "AC" | "SS" | "SC" | "CC";
 };
 
-type PatientStepThreeData = {
+type PatientStepTwoData = {
   height?: number;
   weight?: number;
   allergies?: string[];
   chronicConditions?: string[];
 };
 
-type PatientStepFourData = {
+type PatientStepThreeData = {
   address?: {
     street?: string;
     city?: string;
     state?: string;
     country?: string;
   };
-
+};
+type PatientStepFourData = {
   emergencyContact?: {
     name?: string;
     relationship?: string;

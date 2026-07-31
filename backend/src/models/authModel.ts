@@ -23,6 +23,7 @@ const userSchema = new Schema(
     phoneNumber: {
       type: String,
       trim: true,
+      unique: true,
     },
     dateOfBirth: {
       type: Date,
@@ -43,7 +44,7 @@ const userSchema = new Schema(
     onboardingStatus: {
       type: String,
       enum: ["pending", "completed", "skipped"],
-      required: true,
+      default: "pending",
     },
     onboardingStep: {
       type: Number,
@@ -61,6 +62,7 @@ const userSchema = new Schema(
   },
   {
     timestamps: true,
+    strict: true,
   },
 );
 

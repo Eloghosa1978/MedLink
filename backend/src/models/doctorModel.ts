@@ -79,7 +79,7 @@ const doctorSchema = new Schema(
       default: "pending",
     },
   },
-  { timestamps: true },
+  { timestamps: true, strict: true}
 );
 
 export type Doctor = InferSchemaType<typeof doctorSchema>;

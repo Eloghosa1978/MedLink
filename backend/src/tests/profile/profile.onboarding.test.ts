@@ -7,10 +7,9 @@ import request from "supertest";
 import app from "../../app";
 
 import { createUser } from "../helpers/factories/user.factory";
-import { createPatientProfile } from "../helpers/factories/patient.factory";
-import { createDoctorProfile } from "../helpers/factories/doctor.factory";
 
-describe("POST /api/profile", () => {
+
+describe("POST /api/profile/onboarding", () => {
   describe("Onboarding steps", () => {
     it("should complete patient's basic profile", async () => {
       const user = await createUser({
@@ -22,7 +21,7 @@ describe("POST /api/profile", () => {
       mockAuthenticatedUser(user.uid);
 
       const response = await request(app)
-        .post("/api/profile")
+        .post("/api/profile/onboarding")
         .set("Authorization", "Bearer fake-token")
         .send({
           firstName: "John",
@@ -45,12 +44,11 @@ describe("POST /api/profile", () => {
       mockAuthenticatedUser(user.uid);
 
       const response = await request(app)
-        .post("/api/profile")
+        .post("/api/profile/onboarding")
         .set("Authorization", "Bearer fake-token")
         .send({
-          phoneNumber: "08012345678",
-          dateOfBirth: "2002-05-05",
-          gender: "male",
+          bloodGroup: "O+",
+          genotype: "AA",
         });
       expect(response.status).toBe(200);
 
@@ -66,7 +64,7 @@ describe("POST /api/profile", () => {
       mockAuthenticatedUser(user.uid);
 
       const response = await request(app)
-        .post("/api/profile")
+        .post("/api/profile/onboarding")
         .set("Authorization", "Bearer fake-token")
         .send({});
 

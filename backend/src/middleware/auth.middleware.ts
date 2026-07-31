@@ -2,7 +2,7 @@ import { getAdminAuth } from "../config/firebase-admin";
 import { Request, Response, NextFunction } from "express";
 import { findUserById } from "../services/auth.service";
 
-const adminAuth = getAdminAuth();
+// const adminAuth = getAdminAuth();
 
 declare global {
   namespace Express {
@@ -27,22 +27,12 @@ export const authMiddleware = async (
   const idToken = authHeader.split(" ")[1];
 
   try {
+    const adminAuth = getAdminAuth();
     const decodedToken = await adminAuth.verifyIdToken(idToken);
-
-    const dbUser = await findUserById(decodedToken.uid);
-
-    if (!dbUser) {
-      return res.status(401).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
     req.user = decodedToken;
-    req.dbUser = dbUser;
-
     next();
   } catch (error) {
+    console.error("Error in authMiddleware:", error);
     return res
       .status(401)
       .json({ success: false, message: "Invalid auth token" });

@@ -2,15 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { findUserById } from "../services/auth.service";
 import { UserDocument } from "../models/authModel";
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: any;
-      dbUser?: UserDocument;
-    }
-  }
-}
-
 export const authorizeRole =
   (requiredRole: "patient" | "doctor" | "admin") =>
   async (req: Request, res: Response, next: NextFunction) => {
@@ -18,7 +9,7 @@ export const authorizeRole =
       const uid = req.user?.uid;
 
       if (!uid) {
-        return res.status(201).json({
+        return res.status(401).json({
           success: false,
           message: "Unauthorised user",
         });
@@ -34,13 +25,21 @@ export const authorizeRole =
       }
 
       if (user.role !== requiredRole) {
-        return res.status(404).json({
+        return res.status(403).json({
           success: false,
-          code: "unAuthorized",
+          code: "UNAUTHORIZED",
           message: "You don't have permission to access this action",
         });
       }
       req.dbUser = user;
       next();
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error in authorizeRole middleware:", error);
+      return res.status(500).json({
+        success: false,
+        code: "INTERNAL_SERVER_ERROR",
+        message: "An unexpected error occurred while authorizing the user",
+        error: `Error message: ${error}`,
+      });
+    }
   };
